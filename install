@@ -1,0 +1,26 @@
+Git maven jenkins installation
+#! /bin/bash
+ 
+yum remove -y java
+yum install -y git 
+yum install java-1.8.0-openjdk.x86_64 -y
+ 
+wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+ 
+sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+ 
+yum install -y apache-maven
+ 
+wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+ 
+rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
+ 
+yum install -y jenkins
+ 
+
+service jenkins start
+ 
+chkconfig jenkins on
+alternatives --config java
+
+
